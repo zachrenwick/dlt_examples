@@ -33,9 +33,9 @@ def github_source(owner: str = dlt.secrets.value, access_token: str = dlt.secret
 
 def get_data() -> None:
     pipeline = dlt.pipeline(
-        pipeline_name='github_pipeline',
-        destination='duckdb',
-        dataset_name='github_data',
+           pipeline_name='github_pipeline',
+           destination='bigquery',
+           dataset_name='github_data',
         progress="log"
     )
     # Load values from secrets.toml
