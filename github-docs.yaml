@@ -1,0 +1,46 @@
+# Source Metadata
+source_name: github
+version: 1.8.30
+authentication_required: true
+api_types_available:
+  - REST
+
+# Client / Connection Config
+client:
+  base_url: https://api.github.com
+  auth:
+    type: apikey
+    location: header
+    header_name: Authorization
+  headers:
+    Accept: application/vnd.github.v3+json
+  paginator:
+    type: page
+    page_size_param: per_page
+    default_page_size: 30
+
+# Resources (per endpoint/object)
+resources:
+  - name: repositories
+    endpoint:
+      path: /users/{username}/repos
+      method: GET
+      data_selector: 
+      params: {}
+
+# Auth Details from Docs (for validation or onboarding)
+auth_info:
+  mentioned_objects:
+    - PersonalAccessToken
+    - OAuthApp
+
+# Known Quirks or Risks, Caveats
+notes:
+  - Requires a personal access token with at least the `repo` scope.
+  - Rate limits apply based on the type of authentication used.
+
+# Troubleshooting & Error Patterns
+errors:
+  - REQUEST_LIMIT_EXCEEDED: Throttle API calls or reduce frequency
+  - 401 Unauthorized: Recheck OAuth scopes or token expiration
+  - 404 Not Found: Validate repository or organization names
