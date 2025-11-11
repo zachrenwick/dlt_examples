@@ -17,6 +17,5 @@ pyarrow==22.0.0
 scikit-learn==1.7.0
 seaborn==0.13.2
 tinycss2==1.4.0
-torch==2.7.1+cpu
 uri-template==1.3.0
 webcolors==24.11.1
