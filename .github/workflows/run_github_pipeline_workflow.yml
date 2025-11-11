@@ -1,7 +1,7 @@
 name: Run github_pipeline pipeline from github_pipeline.py
 'on':
   schedule:
-  - cron: '0 */6 * * *'  # every 6 hours
+  - cron: 0 */6 * * *
   workflow_dispatch: null
 env:
   OWNER: ${{ secrets.OWNER }} }}
@@ -27,14 +27,14 @@ jobs:
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
-        python-version: 3.14.x
+        python-version: 3.10.x
     - uses: syphar/restore-virtualenv@v1
       id: cache-virtualenv
       with:
-        requirement_files: requirements.txt
+        requirement_files: requirements_github_action.txt
     - uses: syphar/restore-pip-download-cache@v1
       if: steps.cache-virtualenv.outputs.cache-hit != 'true'
-    - run: pip install -r requirements.txt
+    - run: pip install -r requirements_github_action.txt
       if: steps.cache-virtualenv.outputs.cache-hit != 'true'
     - name: Run pipeline script
       run: python 'github_pipeline.py'
